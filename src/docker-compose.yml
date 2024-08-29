@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports: # Portas que o localstack vai usar
+      - "4566:4566"
+      - "4571:4571"
+    environment: # Configurações e serviços que vou usar do localstack
+      - SERVICES=lambda
+      - DEBUG=1
+      - PERSISTENCE=1
+    volumes: # Montando volume
+      - "./localstack_data:/var/lib/localstack"
+      - "./setup-localstack.sh:/docker-entrypoint-initaws.d/setup-localstack.sh"
